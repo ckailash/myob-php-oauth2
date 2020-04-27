@@ -1,0 +1,1917 @@
+openapi: 3.0.0
+info:
+  title: MYOB AccountRight
+  description: "MYOB AccountRight API file"
+  version: '1.0'
+servers:
+  - description: MYOB API server
+    url: https://api.myob.com
+  - description: MYOB account specific API servier
+    url: https://{server_id}api.myob.com
+    variables:
+      server_id:
+        default: ''
+        description: Server ID as returned in the company files endpoint's Uri field
+security:
+  - OAuth2:
+      - CompanyFile
+paths:
+  /accountright:
+    get:
+      tags:
+        - General API Endpoints
+      summary: List all company files in the users account
+      description: >-
+        The default endpoint for the MYOB AccountRight API.
+
+
+        The first thing you are going to want to do is get a list of the company files. This really couldn't be simpler as there is no specific end point for this, just call the base API url.
+
+
+        As soon as you request the API (provided you have authenticated and passed the right headers, you will be presented with a list of the company files on the computer or that the user has in the cloud.
+      operationId: getCompanyFiles
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListCompanyFile'
+              example:
+                [{
+                  "Id": "f246a491-afba-4efa-a8ba-464a491f20fe",
+                  "Name": "API Sandbox Demo 135a",
+                  "LibraryPath": "API Sandbox Demo 135a",
+                  "ProductVersion": "2020.1",
+                  "ProductLevel": {
+                    "Code": 50,
+                    "Name": "Premier"
+                  },
+                  "CheckedOutDate": null,
+                  "CheckedOutBy": null,
+                  "Uri": "https://ar2.api.myob.com/accountright/f246a491-afba-4efa-a8ba-464a491f20fe",
+                  "Country": "AU",
+                  "LauncherId": "9b0dc91b-70d9-4057-9991-991a64b78ca5",
+                  "SerialNumber": "616083732828",
+                  "UIAccessFlags": 1
+                },
+                {
+                  "Id": "5ad19212-af05-48c4-8c58-baa2e4feb2da",
+                  "Name": "engineer@foodbyus.com",
+                  "LibraryPath": "engineer@foodbyus.com",
+                  "ProductVersion": "2020.1",
+                  "ProductLevel": {
+                    "Code": 50,
+                    "Name": "Premier"
+                  },
+                  "CheckedOutDate": null,
+                  "CheckedOutBy": null,
+                  "Uri": "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da",
+                  "Country": "AU",
+                  "LauncherId": "281237c9-8adf-410d-b231-aca7c5bc1f3b",
+                  "SerialNumber": "614706000219",
+                  "UIAccessFlags": 2
+                }]
+  /accountright/{company_file_id}:
+    get:
+      tags:
+        - General API Endpoints
+      summary: Get the details of one specific company file
+      description: >-
+        ### Exploring a company file
+
+
+        This endpoint will return to you a set of information pertaining to the specific company file, from the ID and Name, it's product Version and Level along with the serial number for this file. A key element of information here is the **country** as that will determine if this is an AUD or NZD file.
+
+
+        It will also give a complete list of all API Resources available for this file, making it very quick and easy to find any/all specific resource endpoints for this file.
+      operationId: getCompanyFile
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/getCompanyFile'
+  /{company_file_id}/Contact/Supplier:
+    get:
+      tags:
+        - Supplier
+      summary: Fetch a list of all Suppliers
+      description: '### Get a full list of all suppliers'
+      operationId: getSuppliers
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/ifModifiedSince'
+        - $ref: '#/components/parameters/ifNoneMatch'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ListOfSuppliers'
+    post:
+      tags:
+        - Supplier
+      summary: Create a new supplier
+      description: '### Add a new supplier to the company file'
+      operationId: createSupplier
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createSupplierRequest'
+        required: true
+      responses:
+        201:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: object
+  /{company_file_id}/Contact/Supplier/{guid}:
+    put:
+      tags:
+        - Supplier
+      summary: Edit a supplier
+      description: '### Editing a supplier'
+      operationId: editSupplier
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/editSupplierRequest'
+        required: true
+      responses:
+        200:
+          description: ''
+          content:
+            text/plain:
+              schema:
+                type: object
+    delete:
+      tags:
+        - Supplier
+      summary: Delete a supplier
+      operationId: deleteSupplier
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteSupplierRequest'
+            example:
+              UID: ee1c61ed-98f0-4e0e-a0d5-712149206b69
+        required: true
+      responses:
+        200:
+          description: ''
+  /{company_file_id}/GeneralLedger/Account:
+    get:
+      tags:
+        - Accounts
+      summary: Gets all accounts
+      description: >-
+        Each account is identified by a unique five-digit number. The first digit indicates the account’s classification (for example, accounts starting with 1 are asset accounts). The remaining four digits determine its location within the classification.
+        The accounts list groups accounts into eight classifications—Asset, Liability, Equity, Income, Cost of Sales, Expense, Other Income and Other Expense.
+      operationId: getAccounts
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/ifModifiedSince'
+        - $ref: '#/components/parameters/ifNoneMatch'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/AccountsList'
+  /{company_file_id}/Purchase/Bill/Item:
+    get:
+      tags:
+        - Purchase Bill Items
+      summary: List all the Item bills
+      description: Get a list of all item type bills
+      operationId: getItemBills
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/ifModifiedSince'
+        - $ref: '#/components/parameters/ifNoneMatch'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getItemBills'
+    post:
+      tags:
+        - Purchase Bill Items
+      summary: Create a new item bill
+      description: Create a new bill of type item
+      operationId: createItemBill
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createItemBill'
+      responses:
+        201:
+          description: ''
+  /{company_file_id}/Purchase/Bill/Item/{guid}:
+    put:
+      tags:
+        - Purchase Bill Items
+      summary: Update a new item type bill
+      description: Update a new item type bill
+      operationId: editItemBill
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/editItemBill'
+      responses:
+        200:
+          description: ''
+    delete:
+      tags:
+        - Purchase Bill Items
+      summary: Delete an bill of item type
+      description: Delete a new bill of type item
+      operationId: deleteItemBill
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteItemBill'
+      responses:
+        200:
+          description: ''
+  /{company_file_id}/Sale/DebitRefund:
+    get:
+      tags:
+        - Debit Refund
+      summary: Get debit refunds
+      description: Get debit refunds
+      operationId: getDebitRefunds
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/ifModifiedSince'
+        - $ref: '#/components/parameters/ifNoneMatch'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getDebitRefunds'
+    post:
+      tags:
+        - Debit Refund
+      summary: Create a debit refund
+      description: Create a debit refund
+      operationId: createDebitRefund
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createDebitRefund'
+      responses:
+        201:
+          description: ''
+          headers: {}
+  /{company_file_id}/Sale/DebitRefund/{guid}:
+    delete:
+      tags:
+        - Debit Refund
+      summary: Delete a debit refund
+      description: Delete a debit refund
+      operationId: Deleteanbillofitemtype
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/deleteDebitRefund'
+      responses:
+        200:
+          description: ''
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: For more information
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://secure.myob.com/oauth2/account/authorize'
+          tokenUrl: 'https://secure.myob.com/oauth2/v1/authorize'
+          scopes:
+            CompanyFile: Read and write access to the company files
+  parameters:
+    orderBy:
+      in: query
+      name: $orderBy
+      description: Order results in ascending or descending order, by a specified field.
+      example: "$orderby=Number asc"
+      schema:
+        type: string
+    top:
+      in: query
+      name: $top
+      description: Retrieve the first x records in a list.
+      example: "$top=5"
+      schema:
+        type: string
+    skip:
+      in: query
+      name: $skip
+      description: Retrieve all records in a list, except for the first x records
+      example: "$skip=5"
+      schema:
+        type: string
+    filter:
+      in: query
+      name: $filter
+      description: Retrieve all records matching a specified expression.
+      example: "$filter=5"
+      schema:
+        type: string
+    ifModifiedSince:
+      in: header
+      name: If-Modified-Since
+      description: Only records created or modified since this timestamp will be returned
+      example: "Fri, 21 Mar 2014 02:51:32 GMT"
+      schema:
+        type: string
+    ifNoneMatch:
+      in: header
+      name: If-None-Match
+      description: If the collection or individual resource hasn't been modified based on the request made, 304 Not Modified with an empty body is returned, if the resource has been modified 200 success code along with the resource is returned.
+      example: "-1674987083"
+      schema:
+        type: string
+    x-myobapi-key:
+      name: x-myobapi-key
+      in: header
+      description: The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
+      required: true
+      style: simple
+      schema:
+        type: string
+        example: '{{client_id}}'
+    x-myobapi-version:
+      name: x-myobapi-version
+      in: header
+      description: The version of the API, v2 is the current version
+      style: simple
+      schema:
+        type: string
+        example: v2
+        default: 'v2'
+    Accept-Encoding:
+      name: Accept-Encoding
+      in: header
+      description: ''
+      style: simple
+      schema:
+        type: string
+        example: gzip,deflate
+        default: 'gzip,deflate'
+    company_file_id:
+      name: company_file_id
+      in: path
+      description: 'The ID of the company in use'
+      required: true
+      style: simple
+      schema:
+        type: string
+    guid:
+      name: guid
+      in: path
+      description: 'The GUID of the resource being created'
+      required: true
+      style: simple
+      schema:
+        type: string
+  schemas:
+    createDebitRefund:
+      title: createDebitRefund
+      required:
+        - DepositTo
+        - Account
+        - Bill
+        - Date
+        - Amount
+      type: object
+      properties:
+        UID:
+          type: string
+        DepositTo:
+          type: string
+        Account:
+          $ref: '#/components/schemas/DebitRefundAccount'
+        Bill:
+          $ref: '#/components/schemas/DebitRefundBill'
+        Supplier:
+          $ref: '#/components/schemas/Supplier'
+        Number:
+          type: string
+        Date:
+          type: string
+        Amount:
+          type: number
+        Memo:
+          type: string
+        PaymentMethod:
+          type: string
+          nullable: true
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    getDebitRefunds:
+      title: getDebitRefunds
+      required:
+        - Items
+        - NextPageLink
+        - Count
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebitRefund'
+          description: ''
+        NextPageLink:
+          type: string
+          nullable: true
+        Count:
+          type: integer
+          format: int32
+    DebitRefund:
+      title: Item38
+      required:
+        - DepositTo
+        - Account
+        - Bill
+        - Date
+        - Amount
+      type: object
+      properties:
+        UID:
+          type: string
+        DepositTo:
+          type: string
+        Account:
+          $ref: '#/components/schemas/DebitRefundAccount'
+        Bill:
+          $ref: '#/components/schemas/DebitRefundBill'
+        Supplier:
+          $ref: '#/components/schemas/Supplier'
+        Number:
+          type: string
+        Date:
+          type: string
+        Amount:
+          type: number
+        Memo:
+          type: string
+        PaymentMethod:
+          type: string
+          nullable: true
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    DebitRefundBill:
+      type: object
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        URI:
+          type: string
+    DebitRefundAccount:
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    deleteDebitRefund:
+      title: deleteDebitRefund
+      required:
+        - UID
+      type: object
+      properties:
+        UID:
+          type: string
+      example:
+        UID: ee1c61ed-98f0-4e0e-a0d5-712149206b69
+    editItemBill:
+      title: editItemBill
+      required:
+        - UID
+        - Date
+          - Supplier
+          - ShipToAddress
+          - Lines
+          - FreightTaxCode
+      type: object
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        Date:
+          type: string
+        SupplierInvoiceNumber:
+          type: string
+          nullable: true
+        Supplier:
+          $ref: '#/components/schemas/Supplier'
+        ShipToAddress:
+          type: string
+        Terms:
+          $ref: '#/components/schemas/ItemBillTerms'
+        IsTaxInclusive:
+          type: boolean
+        IsReportable:
+          type: boolean
+        Lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemBillLine'
+        Subtotal:
+          type: number
+        SubtotalForeign:
+          type: number
+          nullable: true
+        Freight:
+          type: number
+        FreightTaxCode:
+          $ref: '#/components/schemas/FreightTaxCode'
+        TotalTax:
+          type: number
+        TotalTaxForeign:
+          type: number
+          nullable: true
+        TotalAmount:
+          type: number
+        TotalAmountForeign:
+          type: number
+          nullable: true
+        Category:
+          $ref: '#/components/schemas/ItemBillCategory'
+        Comment:
+          type: string
+        ShippingMethod:
+          type: string
+          nullable: true
+        PromisedDate:
+          type: string
+          nullable: true
+        JournalMemo:
+          type: string
+        BillDeliveryStatus:
+          type: string
+        AppliedToDate:
+          type: number
+        AppliedToDateForeign:
+          type: number
+          nullable: true
+        BalanceDueAmount:
+          type: number
+        BalanceDueAmountForeign:
+          type: number
+          nullable: true
+        Status:
+          type: string
+          enum:
+            - Open
+            - Closed
+            - Debit
+        LastPaymentDate:
+          type: string
+        Order:
+          $ref: '#/components/schemas/ItemBillOrder'
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        CurrencyExchangeRate:
+          type: number
+          nullable: true
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    deleteItemBill:
+      title: deleteItemBill
+      required:
+        - UID
+      type: object
+      properties:
+        UID:
+          type: string
+      example:
+        UID: ee1c61ed-98f0-4e0e-a0d5-712149206b69
+    createItemBill:
+      title: createItemBill
+      required:
+        - Date
+        - Supplier
+        - ShipToAddress
+        - Lines
+        - FreightTaxCode
+      type: object
+      properties:
+        Number:
+          type: string
+        Date:
+          type: string
+        SupplierInvoiceNumber:
+          type: string
+          nullable: true
+        Supplier:
+          $ref: '#/components/schemas/Supplier'
+        ShipToAddress:
+          type: string
+        Terms:
+          $ref: '#/components/schemas/ItemBillTerms'
+        IsTaxInclusive:
+          type: boolean
+        IsReportable:
+          type: boolean
+        Lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemBillLine'
+        Subtotal:
+          type: number
+        SubtotalForeign:
+          type: number
+          nullable: true
+        Freight:
+          type: number
+        FreightTaxCode:
+          $ref: '#/components/schemas/FreightTaxCode'
+        TotalTax:
+          type: number
+        TotalTaxForeign:
+          type: number
+          nullable: true
+        TotalAmount:
+          type: number
+        TotalAmountForeign:
+          type: number
+          nullable: true
+        Category:
+          $ref: '#/components/schemas/ItemBillCategory'
+        Comment:
+          type: string
+        ShippingMethod:
+          type: string
+          nullable: true
+        PromisedDate:
+          type: string
+          nullable: true
+        JournalMemo:
+          type: string
+        BillDeliveryStatus:
+          type: string
+        AppliedToDate:
+          type: number
+        AppliedToDateForeign:
+          type: number
+          nullable: true
+        BalanceDueAmount:
+          type: number
+        BalanceDueAmountForeign:
+          type: number
+          nullable: true
+        Status:
+          type: string
+          enum:
+            - Open
+            - Closed
+            - Debit
+        LastPaymentDate:
+          type: string
+        Order:
+          $ref: '#/components/schemas/ItemBillOrder'
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        CurrencyExchangeRate:
+          type: number
+          nullable: true
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    AccountsList:
+      title: AccounstList
+      required:
+        - Items
+        - NextPageLink
+        - Count
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+          description: ''
+        NextPageLink:
+          type: string
+          nullable: true
+        Count:
+          type: integer
+          format: int32
+    Account:
+      title: Account
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        Classification:
+          type: string
+          enum:
+            - Asset
+            - Liability
+            - Equity
+            - Income
+            - CostOfSales
+            - Expense
+            - OtherIncome
+            - OtherExpense
+        Type:
+          type: string
+        Number:
+          type: integer
+          format: int32
+        Description:
+          type: string
+        ParentAccount:
+          $ref: '#/components/schemas/ParentAccount'
+        IsActive:
+          type: boolean
+        TaxCode:
+          $ref: '#/components/schemas/TaxCode'
+        Level:
+          type: integer
+          format: int32
+        OpeningBalance:
+          type: number
+        CurrentBalance:
+          type: number
+        BankingDetails:
+          $ref: '#/components/schemas/BankingDetails'
+        IsHeader:
+          type: boolean
+        LastReconciledDate:
+          type: string
+          nullable: true
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        LastModified:
+          type: string
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    ParentAccount:
+      title: ParentAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    BankingDetails:
+      title: BankingDetails
+      type: object
+      properties:
+        BSBNumber:
+          type: string
+        BankAccountNumber:
+          type: string
+          nullable: true
+        BankAccountName:
+          type: string
+        CompanyTradingName:
+          type: string
+        BankCode:
+          type: string
+        CreateBankFiles:
+          type: boolean
+        DirectEntryUserId:
+          type: string
+        IncludeSelfBalancingTransaction:
+          type: boolean
+        StatementParticulars:
+          type: string
+    ForeignCurrency:
+      title: ForeignCurrency
+      type: object
+      properties:
+        UID:
+          type: string
+        Code:
+          type: string
+        Name:
+          type: string
+        URI:
+          type: string
+    getItemBills:
+      title: getItemBills
+      required:
+        - Items
+        - NextPageLink
+        - Count
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemBill'
+          description: ''
+        NextPageLink:
+          type: string
+          nullable: true
+        Count:
+          type: integer
+          format: int32
+    ItemBill:
+      title: ItemBill
+      type: object
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        Date:
+          type: string
+        SupplierInvoiceNumber:
+          type: string
+          nullable: true
+        Supplier:
+          $ref: '#/components/schemas/Supplier'
+        ShipToAddress:
+          type: string
+        Terms:
+          $ref: '#/components/schemas/ItemBillTerms'
+        IsTaxInclusive:
+          type: boolean
+        IsReportable:
+          type: boolean
+        Lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItemBillLine'
+        Subtotal:
+          type: number
+        SubtotalForeign:
+          type: number
+          nullable: true
+        Freight:
+          type: number
+        FreightTaxCode:
+          $ref: '#/components/schemas/FreightTaxCode'
+        TotalTax:
+          type: number
+        TotalTaxForeign:
+          type: number
+          nullable: true
+        TotalAmount:
+          type: number
+        TotalAmountForeign:
+          type: number
+          nullable: true
+        Category:
+          $ref: '#/components/schemas/ItemBillCategory'
+        Comment:
+          type: string
+        ShippingMethod:
+          type: string
+          nullable: true
+        PromisedDate:
+          type: string
+          nullable: true
+        JournalMemo:
+          type: string
+        BillDeliveryStatus:
+          type: string
+        AppliedToDate:
+          type: number
+        AppliedToDateForeign:
+          type: number
+          nullable: true
+        BalanceDueAmount:
+          type: number
+        BalanceDueAmountForeign:
+          type: number
+          nullable: true
+        Status:
+          type: string
+          enum:
+            - Open
+            - Closed
+            - Debit
+        LastPaymentDate:
+          type: string
+        Order:
+          $ref: '#/components/schemas/ItemBillOrder'
+        ForeignCurrency:
+          $ref: '#/components/schemas/ForeignCurrency'
+        CurrencyExchangeRate:
+          type: number
+          nullable: true
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    ItemBillOrder:
+      title: ItemBillOrder
+      type: object
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        URI:
+          type: string
+    ItemBillCategory:
+      title: ItemBillCategory
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    ItemBillLine:
+      title: ItemBillLine
+      type: object
+      required:
+        - BillQuantity
+        - Total
+        - UnitPrice
+        - UnitCount
+        - TaxCode
+        - Item
+        - Account
+        - Location
+      properties:
+        RowID:
+          type: integer
+          format: int32
+        Type:
+          type: string
+          enum:
+            - Transaction
+            - Header
+            - Subtotal
+        Description:
+          type: string
+        BillQuantity:
+          type: number
+        ReceivedQuantity:
+          type: number
+        BackorderQuantity:
+          type: number
+        Total:
+          type: number
+        TotalForeign:
+          type: number
+        UnitPrice:
+          type: number
+        UnitsOfMeasure:
+          type: string
+        UnitCount:
+          type: number
+        UnitPriceForeign:
+          type: number
+        Job:
+          $ref: '#/components/schemas/Job'
+        DiscountPercent:
+          type: number
+        TaxCode:
+          $ref: '#/components/schemas/TaxCode'
+        Item:
+          $ref: '#/components/schemas/Item'
+        Account:
+          $ref: '#/components/schemas/ItemBillLocationAccount'
+        Location:
+          $ref: '#/components/schemas/ItemBillLineLocation'
+        RowVersion:
+          type: string
+    Item:
+      title: Item
+      type: object
+      required:
+        - UID
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        Name:
+          type: string
+        URI:
+          type: string
+    ItemBillLocationAccount:
+      title: ItemBillLocationAccount
+      type: object
+      nullable: true
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayId:
+          type: string
+        URI:
+          type: string
+    ItemBillLineLocation:
+      title: ItemBillLineLocation
+      type: object
+      required:
+        - UID
+      properties:
+        UID:
+          type: string
+        Identifier:
+          type: string
+        Name:
+          type: string
+        URI:
+          type: string
+    Job:
+      title: Job
+      type: object
+      properties:
+        UID:
+          type: string
+        Number:
+          type: string
+        Name:
+          type: string
+        URI:
+          type: string
+    ItemBillTerms:
+      title: ItemBillTerms
+      type: object
+      properties:
+        PaymentIsDue:
+          type: string
+        DiscountDate:
+          type: integer
+          format: int32
+        BalanceDueDate:
+          type: integer
+          format: int32
+        DiscountForEarlyPayment:
+          type: number
+        MonthlyChargeForLatePayment:
+          type: number
+        DiscountExpiryDate:
+          type: string
+        Discount:
+          type: number
+        DiscountForeign:
+          type: string
+          nullable: true
+        DueDate:
+          type: string
+    Supplier:
+      title: Supplier
+      required:
+        - UID
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    createSupplierRequest:
+      title: createSupplierRequest
+      required:
+        - CompanyName
+        - LastName
+        - FirstName
+        - IsIndividual
+        - BuyingDetails
+        - DisplayID
+      type: object
+      properties:
+        CompanyName:
+          type: string
+          nullable: true
+        LastName:
+          type: string
+        FirstName:
+          type: string
+        IsIndividual:
+          type: boolean
+        IsActive:
+          type: boolean
+        DisplayID:
+          type: string
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        Notes:
+          type: string
+        Identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifiers'
+        CustomList1:
+          $ref: '#/components/schemas/CustomList'
+        CustomList2:
+          $ref: '#/components/schemas/CustomList'
+        CustomList3:
+          $ref: '#/components/schemas/CustomList'
+        CustomField1:
+          $ref: '#/components/schemas/CustomField'
+        CustomField2:
+          $ref: '#/components/schemas/CustomField'
+        CustomField3:
+          $ref: '#/components/schemas/CustomField'
+        BuyingDetails:
+          $ref: '#/components/schemas/BuyingDetails'
+        PaymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+    editSupplierRequest:
+      title: editSupplierRequest
+      required:
+        - CompanyName
+        - LastName
+        - FirstName
+        - IsIndividual
+        - BuyingDetails
+        - DisplayID
+      type: object
+      properties:
+        CompanyName:
+          type: string
+        LastName:
+          type: string
+        FirstName:
+          type: string
+        IsIndividual:
+          type: boolean
+        IsActive:
+          type: boolean
+        DisplayID:
+          type: string
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        Notes:
+          type: string
+        Identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifiers'
+        CustomList1:
+          $ref: '#/components/schemas/CustomList'
+        CustomList2:
+          $ref: '#/components/schemas/CustomList'
+        CustomList3:
+          $ref: '#/components/schemas/CustomList'
+        CustomField1:
+          $ref: '#/components/schemas/CustomField'
+        CustomField2:
+          $ref: '#/components/schemas/CustomField'
+        CustomField3:
+          $ref: '#/components/schemas/CustomField'
+        BuyingDetails:
+          $ref: '#/components/schemas/BuyingDetails'
+        PaymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+    deleteSupplierRequest:
+      title: deleteSupplierRequest
+      required:
+        - UID
+      type: object
+      properties:
+        UID:
+          type: string
+      example:
+        UID: ee1c61ed-98f0-4e0e-a0d5-712149206b69
+    CustomList:
+      title: CustomList
+      type: object
+      properties:
+        Label:
+          type: string
+        Value:
+          type: string
+    Identifiers:
+      title: Identifiers
+      type: object
+      properties:
+        Label:
+          type: string
+        Value:
+          type: string
+    ListOfSuppliers:
+      title: ListOfSuppliers
+      required:
+        - Items
+        - NextPageLink
+        - Count
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Suppliers'
+          description: ''
+        NextPageLink:
+          type: string
+          nullable: true
+        Count:
+          type: integer
+          format: int32
+    Suppliers:
+      title: Suppliers
+      required:
+        - UID
+        - IsIndividual
+        - DisplayID
+        - IsActive
+        - Addresses
+        - Notes
+        - Identifiers
+        - CustomList1
+        - CustomList2
+        - CustomList3
+        - CustomField1
+        - CustomField2
+        - CustomField3
+        - CurrentBalance
+        - BuyingDetails
+        - PaymentDetails
+        - ForeignCurrency
+        - LastModified
+        - PhotoURI
+        - URI
+        - RowVersion
+      type: object
+      properties:
+        UID:
+          type: string
+        CompanyName:
+          type: string
+        IsIndividual:
+          type: boolean
+        DisplayID:
+          type: string
+        IsActive:
+          type: boolean
+        Addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+          description: ''
+          nullable: true
+        Notes:
+          type: string
+          nullable: true
+        Identifiers:
+          type: string
+          nullable: true
+        CustomList1:
+          type: string
+          nullable: true
+        CustomList2:
+          type: string
+          nullable: true
+        CustomList3:
+          type: string
+          nullable: true
+        CustomField1:
+          $ref: '#/components/schemas/CustomField'
+        CustomField2:
+          $ref: '#/components/schemas/CustomField'
+        CustomField3:
+          $ref: '#/components/schemas/CustomField'
+        CurrentBalance:
+          type: number
+        BuyingDetails:
+          $ref: '#/components/schemas/BuyingDetails'
+        PaymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+        ForeignCurrency:
+          type: string
+          nullable: true
+        LastModified:
+          type: string
+        PhotoURI:
+          type: string
+          nullable: true
+        URI:
+          type: string
+        RowVersion:
+          type: string
+        LastName:
+          type: string
+        FirstName:
+          type: string
+    Address:
+      title: Address
+      type: object
+      properties:
+        Location:
+          type: integer
+          format: int32
+        Street:
+          type: string
+        City:
+          type: string
+        State:
+          type: string
+        PostCode:
+          type: string
+        Country:
+          type: string
+        Phone1:
+          type: string
+        Phone2:
+          type: string
+        Phone3:
+          type: string
+        Fax:
+          type: string
+        Email:
+          type: string
+        Website:
+          type: string
+        ContactName:
+          type: string
+        Salutation:
+          type: string
+    PaymentDetails:
+      title: PaymentDetails
+      required:
+        - BSBNumber
+        - BankAccountNumber
+        - BankAccountName
+        - StatementText
+        - Refund
+      type: object
+      properties:
+        BSBNumber:
+          type: string
+          nullable: true
+        BankAccountNumber:
+          type: string
+          nullable: true
+        BankAccountName:
+          type: string
+          nullable: true
+        StatementText:
+          type: string
+          nullable: true
+        Refund:
+          $ref: '#/components/schemas/PaymentDetailsRefund'
+    PaymentDetailsRefund:
+      title: PaymentDetailsRefund
+      type: object
+      properties:
+        PaymentMethod:
+          type: string
+        CardNumber:
+          type: string
+        NameOnCard:
+          type: string
+        Notes:
+          type: string
+    CustomField:
+      title: CustomField
+      type: object
+      properties:
+        Label:
+          type: string
+        Value:
+          type: string
+    UIAccessFlags:
+      title: UIAccessFlags
+      type: string
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+    BuyingDetails:
+      title: BuyingDetails
+      required:
+        - TaxCode
+        - FreightTaxCode
+      type: object
+      properties:
+        PurchaseLayout:
+          type: string
+          enum:
+            - NoDefault
+            - Service
+            - Item
+            - Professional
+            - Miscellaneous
+        PrintedForm:
+          type: string
+          nullable: true
+        PurchaseOrderDelivery:
+          type: string
+        ExpenseAccount:
+          $ref: '#/components/schemas/ExpenseAccount'
+        PaymentMemo:
+          type: string
+          nullable: true
+        PurchaseComment:
+          type: string
+          nullable: true
+        SupplierBillingRate:
+          type: number
+        ShippingMethod:
+          type: string
+          nullable: true
+        IsReportable:
+          type: boolean
+        CostPerHour:
+          type: number
+        Credit:
+          $ref: '#/components/schemas/Credit'
+        ABN:
+          type: string
+          nullable: true
+        ABNBranch:
+          type: string
+          nullable: true
+        TaxIdNumber:
+          type: string
+          nullable: true
+        TaxCode:
+          $ref: '#/components/schemas/TaxCode'
+        FreightTaxCode:
+          $ref: '#/components/schemas/FreightTaxCode'
+        UseSupplierTaxCode:
+          type: boolean
+        Terms:
+          $ref: '#/components/schemas/BuyingDetailTerms'
+        PaymentDetails:
+          $ref: '#/components/schemas/PaymentDetails'
+    ExpenseAccount:
+      title: ExpenseAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    TaxCode:
+      title: TaxCode
+      required:
+        - UID
+        - Code
+        - URI
+      type: object
+      properties:
+        UID:
+          type: string
+        Code:
+          type: string
+        URI:
+          type: string
+    FreightTaxCode:
+      title: FreightTaxCode
+      required:
+        - UID
+      type: object
+      properties:
+        UID:
+          type: string
+    BuyingDetailTerms:
+      title: Terms
+      type: object
+      properties:
+        PaymentIsDue:
+          type: string
+        DiscountDate:
+          type: integer
+          format: int32
+        BalanceDueDate:
+          type: integer
+          format: int32
+        DiscountForEarlyPayment:
+          type: number
+        VolumeDiscount:
+          type: number
+    Credit:
+      title: Credit
+      required:
+        - Limit
+        - Available
+        - PastDue
+      type: object
+      properties:
+        Limit:
+          type: number
+        Available:
+          type: number
+        PastDue:
+          type: number
+    ListCompanyFile:
+      title: ListCompanyFile
+      required:
+        - Id
+        - Name
+        - LibraryPath
+        - ProductVersion
+        - ProductLevel
+        - CheckedOutDate
+        - CheckedOutBy
+        - Uri
+        - Country
+        - LauncherId
+        - SerialNumber
+        - UIAccessFlags
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        LibraryPath:
+          type: string
+        ProductVersion:
+          type: string
+        ProductLevel:
+          $ref: '#/components/schemas/ProductLevel'
+        CheckedOutDate:
+          type: string
+          nullable: true
+        CheckedOutBy:
+          type: string
+          nullable: true
+        Uri:
+          type: string
+        Country:
+          type: string
+        LauncherId:
+          type: string
+        SerialNumber:
+          type: string
+        UIAccessFlags:
+          $ref: '#/components/schemas/UIAccessFlags'
+      example:
+        {
+          "Id": "f246a491-afba-4efa-a8ba-464a491f20fe",
+          "Name": "API Sandbox Demo 135a",
+          "LibraryPath": "API Sandbox Demo 135a",
+          "ProductVersion": "2020.1",
+          "ProductLevel": {
+            "Code": 50,
+            "Name": "Premier"
+          },
+          "CheckedOutDate": null,
+          "CheckedOutBy": null,
+          "Uri": "https://ar2.api.myob.com/accountright/f246a491-afba-4efa-a8ba-464a491f20fe",
+          "Country": "AU",
+          "LauncherId": "9b0dc91b-70d9-4057-9991-991a64b78ca5",
+          "SerialNumber": "616083732828",
+          "UIAccessFlags": 1
+        }
+    ProductLevel:
+      title: ProductLevel
+      required:
+        - Code
+        - Name
+      type: object
+      properties:
+        Code:
+          type: integer
+          format: int32
+        Name:
+          type: string
+      example:
+        Code: 30
+        Name: Plus
+    getCompanyFile:
+      title: getCompanyFile
+      required:
+        - CompanyFile
+        - Resources
+      type: object
+      properties:
+        CompanyFile:
+          $ref: '#/components/schemas/CompanyFile'
+        Resources:
+          type: array
+          items:
+            type: string
+          description: 'A list of resources that can be accessed'
+      example:
+        {
+          "CompanyFile": {
+            "Id": "5ad19212-af05-48c4-8c58-baa2e4feb2da",
+            "Name": "engineer@foodbyus.com",
+            "LibraryPath": "engineer@foodbyus.com",
+            "ProductVersion": "2020.1",
+            "ProductLevel": {
+              "Code": 50,
+              "Name": "Premier"
+            },
+            "CheckedOutDate": null,
+            "CheckedOutBy": null,
+            "Uri": "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da",
+            "Country": "AU",
+            "LauncherId": "281237c9-8adf-410d-b231-aca7c5bc1f3b",
+            "SerialNumber": "614706000219",
+            "UIAccessFlags": 2
+          },
+          "Resources": [
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Banking/BankAccount/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Banking/ReceiveMoneyTxn/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Banking/SpendMoneyTxn/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Banking/Statement/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Banking/TransferMoneyTxn/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Company/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Company/Preferences/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Company/FormTemplate/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/CurrentUser/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/Customer/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/Employee/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/EmployeePayrollDetails",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/EmployeePaymentDetails/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/EmployeePaymentSummaryReport/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/EmployeeStandardPay/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/Personal/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Contact/Supplier/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/Account/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/AccountBudget/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/AccountingProperties/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/AccountRegister/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/Category/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/CategoryRegister/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/Currency/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/GeneralJournal/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/Job/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/JobBudget/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/JobRegister/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/JournalTransaction/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/LinkedAccount/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/ProfitLossDistribution/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/GeneralLedger/TaxCode/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Inventory/Adjustment/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Inventory/Item/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Inventory/ItemPriceMatrix/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Inventory/Location/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/EmploymentClassification/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Wage/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Entitlement/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Deduction/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Expense/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Superannuation/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/Tax/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/PayrollCategory/TaxTable/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/SuperannuationFund/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Payroll/Timesheet/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Bill/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Bill/Item/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Bill/Miscellaneous/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Bill/Professional/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Bill/Service/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/DebitRefund/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/DebitSettlement/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Order/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Order/Item",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Order/Miscellaneous",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Order/Professional",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/Order/Service",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/SupplierPayment/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/SupplierPayment/RecordWithDiscountsAndFees",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Purchase/SupplierPayment/CalculateDiscounts",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/Payroll/EmployeePayrollAdvice/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/GST/NZGSTReport/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/TaxCodeSummary",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/ProfitAndLossSummary",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/PayrollCategorySummary",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Report/TransactionCodingSummary",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/CreditRefund/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/CreditSettlement/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/CustomerPayment/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/CustomerPayment/CalculateDiscountsFees",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/CustomerPayment/RecordWithDiscountsAndFees",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/Item/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/Miscellaneous/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/Professional/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/Service/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Invoice/TimeBilling/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/Item/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/Miscellaneous/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/Professional/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/Service/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Quote/TimeBilling/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/Item/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/Miscellaneous/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/Professional/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/Service/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Sale/Order/TimeBilling/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Security/Role/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/Security/User/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/TimeBilling/Activity/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/TimeBilling/ActivitySlip/",
+            "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da/BankReconciliationReport"
+          ]
+        }
+    CompanyFile:
+      title: CompanyFile
+      required:
+        - Id
+        - Name
+        - LibraryPath
+        - ProductVersion
+        - ProductLevel
+        - CheckedOutDate
+        - CheckedOutBy
+        - Uri
+        - Country
+        - LauncherId
+        - SerialNumber
+        - UIAccessFlags
+      type: object
+      properties:
+        Id:
+          type: string
+        Name:
+          type: string
+        LibraryPath:
+          type: string
+        ProductVersion:
+          type: string
+        ProductLevel:
+          $ref: '#/components/schemas/ProductLevel'
+        CheckedOutDate:
+          type: string
+          nullable: true
+        CheckedOutBy:
+          type: string
+          nullable: true
+        Uri:
+          type: string
+        Country:
+          type: string
+        LauncherId:
+          type: string
+        SerialNumber:
+          type: string
+        UIAccessFlags:
+          $ref: '#/components/schemas/UIAccessFlags'
+      example:
+        {
+          "Id": "5ad19212-af05-48c4-8c58-baa2e4feb2da",
+          "Name": "engineer@foodbyus.com",
+          "LibraryPath": "engineer@foodbyus.com",
+          "ProductVersion": "2020.1",
+          "ProductLevel": {
+            "Code": 50,
+            "Name": "Premier"
+          },
+          "CheckedOutDate": null,
+          "CheckedOutBy": null,
+          "Uri": "https://ar2.api.myob.com/accountright/5ad19212-af05-48c4-8c58-baa2e4feb2da",
+          "Country": "AU",
+          "LauncherId": "281237c9-8adf-410d-b231-aca7c5bc1f3b",
+          "SerialNumber": "614706000219",
+          "UIAccessFlags": 2
+        }
