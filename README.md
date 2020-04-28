@@ -160,7 +160,6 @@ Class | Method | HTTP request | Description
  - [Supplier](docs/Model/Supplier.md)
  - [Suppliers](docs/Model/Suppliers.md)
  - [TaxCode](docs/Model/TaxCode.md)
- - [UIAccessFlags](docs/Model/UIAccessFlags.md)
 
 
 ## Documentation For Authorization

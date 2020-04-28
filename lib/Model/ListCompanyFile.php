@@ -68,7 +68,7 @@ class ListCompanyFile implements ModelInterface, ArrayAccess
         'country' => 'string',
         'launcher_id' => 'string',
         'serial_number' => 'string',
-        'ui_access_flags' => '\MyobAPI\MyobPHP\Model\UIAccessFlags'
+        'ui_access_flags' => 'string'
     ];
 
     /**
@@ -573,7 +573,7 @@ class ListCompanyFile implements ModelInterface, ArrayAccess
     /**
      * Gets ui_access_flags
      *
-     * @return \MyobAPI\MyobPHP\Model\UIAccessFlags
+     * @return string
      */
     public function getUiAccessFlags()
     {
@@ -583,7 +583,7 @@ class ListCompanyFile implements ModelInterface, ArrayAccess
     /**
      * Sets ui_access_flags
      *
-     * @param \MyobAPI\MyobPHP\Model\UIAccessFlags $ui_access_flags ui_access_flags
+     * @param string $ui_access_flags ui_access_flags
      *
      * @return $this
      */

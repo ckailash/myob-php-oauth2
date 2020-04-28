@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **country** | **string** |  | 
 **launcher_id** | **string** |  | 
 **serial_number** | **string** |  | 
-**ui_access_flags** | [**\MyobAPI\MyobPHP\Model\UIAccessFlags**](UIAccessFlags.md) |  | 
+**ui_access_flags** | **string** |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

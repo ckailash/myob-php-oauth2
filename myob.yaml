@@ -1595,11 +1595,6 @@ components:
     UIAccessFlags:
       title: UIAccessFlags
       type: string
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
     BuyingDetails:
       title: BuyingDetails
       required:
