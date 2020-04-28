@@ -43,10 +43,10 @@ class UIAccessFlags
     /**
      * Possible values of this enum
      */
+    const _0 = '0';
     const _1 = '1';
     const _2 = '2';
     const _3 = '3';
-    const _4 = '4';
     
     /**
      * Gets allowable values of the enum
@@ -55,10 +55,10 @@ class UIAccessFlags
     public static function getAllowableEnumValues()
     {
         return [
+            self::_0,
             self::_1,
             self::_2,
             self::_3,
-            self::_4,
         ];
     }
 }
