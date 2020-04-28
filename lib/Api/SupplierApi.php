@@ -1078,6 +1078,335 @@ class SupplierApi
     }
 
     /**
+     * Operation getSupplier
+     *
+     * Get a supplier by GUID
+     *
+     * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
+     * @param  string $company_file_id The ID of the company in use (required)
+     * @param  string $guid The GUID of the resource being created (required)
+     * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
+     * @param  string $accept_encoding accept_encoding (optional, default to 'gzip,deflate')
+     *
+     * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \MyobAPI\MyobPHP\Model\Suppliers
+     */
+    public function getSupplier($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
+    {
+        list($response) = $this->getSupplierWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding);
+        return $response;
+    }
+
+    /**
+     * Operation getSupplierWithHttpInfo
+     *
+     * Get a supplier by GUID
+     *
+     * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
+     * @param  string $company_file_id The ID of the company in use (required)
+     * @param  string $guid The GUID of the resource being created (required)
+     * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
+     * @param  string $accept_encoding (optional, default to 'gzip,deflate')
+     *
+     * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \MyobAPI\MyobPHP\Model\Suppliers, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getSupplierWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
+    {
+        $request = $this->getSupplierRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\MyobAPI\MyobPHP\Model\Suppliers' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\MyobAPI\MyobPHP\Model\Suppliers', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\MyobAPI\MyobPHP\Model\Suppliers';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\MyobAPI\MyobPHP\Model\Suppliers',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getSupplierAsync
+     *
+     * Get a supplier by GUID
+     *
+     * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
+     * @param  string $company_file_id The ID of the company in use (required)
+     * @param  string $guid The GUID of the resource being created (required)
+     * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
+     * @param  string $accept_encoding (optional, default to 'gzip,deflate')
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getSupplierAsync($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
+    {
+        return $this->getSupplierAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getSupplierAsyncWithHttpInfo
+     *
+     * Get a supplier by GUID
+     *
+     * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
+     * @param  string $company_file_id The ID of the company in use (required)
+     * @param  string $guid The GUID of the resource being created (required)
+     * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
+     * @param  string $accept_encoding (optional, default to 'gzip,deflate')
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getSupplierAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
+    {
+        $returnType = '\MyobAPI\MyobPHP\Model\Suppliers';
+        $request = $this->getSupplierRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getSupplier'
+     *
+     * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
+     * @param  string $company_file_id The ID of the company in use (required)
+     * @param  string $guid The GUID of the resource being created (required)
+     * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
+     * @param  string $accept_encoding (optional, default to 'gzip,deflate')
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getSupplierRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
+    {
+        // verify the required parameter 'x_myobapi_key' is set
+        if ($x_myobapi_key === null || (is_array($x_myobapi_key) && count($x_myobapi_key) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $x_myobapi_key when calling getSupplier'
+            );
+        }
+        // verify the required parameter 'company_file_id' is set
+        if ($company_file_id === null || (is_array($company_file_id) && count($company_file_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $company_file_id when calling getSupplier'
+            );
+        }
+        // verify the required parameter 'guid' is set
+        if ($guid === null || (is_array($guid) && count($guid) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $guid when calling getSupplier'
+            );
+        }
+
+        $resourcePath = '/{company_file_id}/Contact/Supplier/{guid}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // header params
+        if ($x_myobapi_key !== null) {
+            $headerParams['x-myobapi-key'] = ObjectSerializer::toHeaderValue($x_myobapi_key);
+        }
+        // header params
+        if ($x_myobapi_version !== null) {
+            $headerParams['x-myobapi-version'] = ObjectSerializer::toHeaderValue($x_myobapi_version);
+        }
+        // header params
+        if ($accept_encoding !== null) {
+            $headerParams['Accept-Encoding'] = ObjectSerializer::toHeaderValue($accept_encoding);
+        }
+
+        // path params
+        if ($company_file_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'company_file_id' . '}',
+                ObjectSerializer::toPathValue($company_file_id),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($guid !== null) {
+            $resourcePath = str_replace(
+                '{' . 'guid' . '}',
+                ObjectSerializer::toPathValue($guid),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json; charset=utf-8']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json; charset=utf-8'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires OAuth (access token)
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getSuppliers
      *
      * Fetch a list of all Suppliers

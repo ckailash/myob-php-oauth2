@@ -155,6 +155,25 @@ paths:
               schema:
                 type: object
   /{company_file_id}/Contact/Supplier/{guid}:
+    get:
+      tags:
+        - Supplier
+      summary: Get a supplier by GUID
+      description: Get a supplier by GUID
+      operationId: getSupplier
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Suppliers'
     put:
       tags:
         - Supplier
@@ -231,6 +250,26 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#/components/schemas/AccountsList'
+  /{company_file_id}/GeneralLedger/Account/{guid}:
+    get:
+      tags:
+        - Accounts
+      summary: Get an account by GUID
+      description: Get an account by GUID
+      operationId: getAccount
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Account'
   /{company_file_id}/Purchase/Bill/Item:
     get:
       tags:
@@ -278,6 +317,25 @@ paths:
         201:
           description: ''
   /{company_file_id}/Purchase/Bill/Item/{guid}:
+    get:
+      tags:
+        - Purchase Bill Items
+      summary: Get one Bill Item by GUID
+      description: Get one Bill Item by GUID
+      operationId: getItemBill
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/ItemBill'
     put:
       tags:
         - Purchase Bill Items
@@ -368,12 +426,31 @@ paths:
           description: ''
           headers: {}
   /{company_file_id}/Sale/DebitRefund/{guid}:
+    get:
+      tags:
+        - Debit Refund
+      summary: Get a debit refund by GUID
+      description: Get a debit refund by GUID
+      operationId: getDebitRefund
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/DebitRefund'
     delete:
       tags:
         - Debit Refund
       summary: Delete a debit refund
       description: Delete a debit refund
-      operationId: Deleteanbillofitemtype
+      operationId: deleteDebitRefund
       parameters:
         - $ref: '#/components/parameters/x-myobapi-key'
         - $ref: '#/components/parameters/x-myobapi-version'

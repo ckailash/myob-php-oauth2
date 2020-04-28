@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**createSupplier**](SupplierApi.md#createSupplier) | **POST** /{company_file_id}/Contact/Supplier | Create a new supplier
 [**deleteSupplier**](SupplierApi.md#deleteSupplier) | **DELETE** /{company_file_id}/Contact/Supplier/{guid} | Delete a supplier
 [**editSupplier**](SupplierApi.md#editSupplier) | **PUT** /{company_file_id}/Contact/Supplier/{guid} | Edit a supplier
+[**getSupplier**](SupplierApi.md#getSupplier) | **GET** /{company_file_id}/Contact/Supplier/{guid} | Get a supplier by GUID
 [**getSuppliers**](SupplierApi.md#getSuppliers) | **GET** /{company_file_id}/Contact/Supplier | Fetch a list of all Suppliers
 
 
@@ -213,6 +214,75 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json
 - **Accept**: text/plain
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
+
+
+## getSupplier
+
+> \MyobAPI\MyobPHP\Model\Suppliers getSupplier($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding)
+
+Get a supplier by GUID
+
+Get a supplier by GUID
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure OAuth2 access token for authorization: OAuth2
+$config = MyobAPI\MyobPHP\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new MyobAPI\MyobPHP\Api\SupplierApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
+$company_file_id = 'company_file_id_example'; // string | The ID of the company in use
+$guid = 'guid_example'; // string | The GUID of the resource being created
+$x_myobapi_version = v2; // string | The version of the API, v2 is the current version
+$accept_encoding = gzip,deflate; // string | 
+
+try {
+    $result = $apiInstance->getSupplier($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SupplierApi->getSupplier: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
+ **company_file_id** | **string**| The ID of the company in use |
+ **guid** | **string**| The GUID of the resource being created |
+ **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
+ **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
+
+### Return type
+
+[**\MyobAPI\MyobPHP\Model\Suppliers**](../Model/Suppliers.md)
+
+### Authorization
+
+[OAuth2](../../README.md#OAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json; charset=utf-8
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../../README.md#documentation-for-models)
