@@ -1,11 +1,11 @@
 # MyobAPI\MyobPHP\GeneralAPIEndpointsApi
 
-All URIs are relative to *https://api.myob.com*
+All URIs are relative to *https://api.myob.com/accountright*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getCompanyFile**](GeneralAPIEndpointsApi.md#getCompanyFile) | **GET** /accountright/{company_file_id} | Get the details of one specific company file
-[**getCompanyFiles**](GeneralAPIEndpointsApi.md#getCompanyFiles) | **GET** /accountright | List all company files in the users account
+[**getCompanyFile**](GeneralAPIEndpointsApi.md#getCompanyFile) | **GET** /{company_file_id} | Get the details of one specific company file
+[**getCompanyFiles**](GeneralAPIEndpointsApi.md#getCompanyFiles) | **GET** / | List all company files in the users account
 
 
 

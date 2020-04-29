@@ -81,7 +81,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://api.myob.com';
+    protected $host = 'https://api.myob.com/accountright';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
@@ -436,15 +436,15 @@ class Configuration
     {
         return array(
           array(
-            "url" => "https://api.myob.com",
+            "url" => "https://api.myob.com/accountright",
             "description" => "MYOB API server",
           ),
           array(
-            "url" => "https://{server_id}api.myob.com",
+            "url" => "{uri}",
             "description" => "MYOB account specific API servier",
             "variables" => array(
-              "server_id" => array(
-                  "description" => "Server ID as returned in the company files endpoint's Uri field",
+              "uri" => array(
+                  "description" => "URL as returned by the API",
                   "default_value" => "",
                 )
               )

@@ -5,18 +5,18 @@ info:
   version: '1.0'
 servers:
   - description: MYOB API server
-    url: https://api.myob.com
+    url: https://api.myob.com/accountright
   - description: MYOB account specific API servier
-    url: https://{server_id}api.myob.com
+    url: '{uri}'
     variables:
-      server_id:
+      uri:
         default: ''
-        description: Server ID as returned in the company files endpoint's Uri field
+        description: URL as returned by the API
 security:
   - OAuth2:
       - CompanyFile
 paths:
-  /accountright:
+  /:
     get:
       tags:
         - General API Endpoints
@@ -78,7 +78,7 @@ paths:
                   "SerialNumber": "614706000219",
                   "UIAccessFlags": 2
                 }]
-  /accountright/{company_file_id}:
+  /{company_file_id}:
     get:
       tags:
         - General API Endpoints

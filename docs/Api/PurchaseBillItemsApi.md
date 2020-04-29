@@ -1,6 +1,6 @@
 # MyobAPI\MyobPHP\PurchaseBillItemsApi
 
-All URIs are relative to *https://api.myob.com*
+All URIs are relative to *https://api.myob.com/accountright*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -327,7 +327,7 @@ class GeneralAPIEndpointsApi
             );
         }
 
-        $resourcePath = '/accountright/{company_file_id}';
+        $resourcePath = '/{company_file_id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -626,7 +626,7 @@ class GeneralAPIEndpointsApi
             );
         }
 
-        $resourcePath = '/accountright';
+        $resourcePath = '/';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

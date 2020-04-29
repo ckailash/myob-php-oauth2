@@ -88,7 +88,7 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.myob.com*
+All URIs are relative to *https://api.myob.com/accountright*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -98,8 +98,8 @@ Class | Method | HTTP request | Description
 *DebitRefundApi* | [**deleteDebitRefund**](docs/Api/DebitRefundApi.md#deletedebitrefund) | **DELETE** /{company_file_id}/Sale/DebitRefund/{guid} | Delete a debit refund
 *DebitRefundApi* | [**getDebitRefund**](docs/Api/DebitRefundApi.md#getdebitrefund) | **GET** /{company_file_id}/Sale/DebitRefund/{guid} | Get a debit refund by GUID
 *DebitRefundApi* | [**getDebitRefunds**](docs/Api/DebitRefundApi.md#getdebitrefunds) | **GET** /{company_file_id}/Sale/DebitRefund | Get debit refunds
-*GeneralAPIEndpointsApi* | [**getCompanyFile**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfile) | **GET** /accountright/{company_file_id} | Get the details of one specific company file
-*GeneralAPIEndpointsApi* | [**getCompanyFiles**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfiles) | **GET** /accountright | List all company files in the users account
+*GeneralAPIEndpointsApi* | [**getCompanyFile**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfile) | **GET** /{company_file_id} | Get the details of one specific company file
+*GeneralAPIEndpointsApi* | [**getCompanyFiles**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfiles) | **GET** / | List all company files in the users account
 *PurchaseBillItemsApi* | [**createItemBill**](docs/Api/PurchaseBillItemsApi.md#createitembill) | **POST** /{company_file_id}/Purchase/Bill/Item | Create a new item bill
 *PurchaseBillItemsApi* | [**deleteItemBill**](docs/Api/PurchaseBillItemsApi.md#deleteitembill) | **DELETE** /{company_file_id}/Purchase/Bill/Item/{guid} | Delete an bill of item type
 *PurchaseBillItemsApi* | [**editItemBill**](docs/Api/PurchaseBillItemsApi.md#edititembill) | **PUT** /{company_file_id}/Purchase/Bill/Item/{guid} | Update a new item type bill
