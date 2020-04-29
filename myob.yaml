@@ -1669,8 +1669,6 @@ components:
       title: TaxCode
       required:
         - UID
-        - Code
-        - URI
       type: object
       properties:
         UID:

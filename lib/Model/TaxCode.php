@@ -204,12 +204,6 @@ class TaxCode implements ModelInterface, ArrayAccess
         if ($this->container['uid'] === null) {
             $invalidProperties[] = "'uid' can't be null";
         }
-        if ($this->container['code'] === null) {
-            $invalidProperties[] = "'code' can't be null";
-        }
-        if ($this->container['uri'] === null) {
-            $invalidProperties[] = "'uri' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -252,7 +246,7 @@ class TaxCode implements ModelInterface, ArrayAccess
     /**
      * Gets code
      *
-     * @return string
+     * @return string|null
      */
     public function getCode()
     {
@@ -262,7 +256,7 @@ class TaxCode implements ModelInterface, ArrayAccess
     /**
      * Sets code
      *
-     * @param string $code code
+     * @param string|null $code code
      *
      * @return $this
      */
@@ -276,7 +270,7 @@ class TaxCode implements ModelInterface, ArrayAccess
     /**
      * Gets uri
      *
-     * @return string
+     * @return string|null
      */
     public function getUri()
     {
@@ -286,7 +280,7 @@ class TaxCode implements ModelInterface, ArrayAccess
     /**
      * Sets uri
      *
-     * @param string $uri uri
+     * @param string|null $uri uri
      *
      * @return $this
      */
