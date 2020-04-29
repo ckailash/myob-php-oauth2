@@ -1,6 +1,6 @@
 <?php
 /**
- * ItemBillLocationAccount
+ * ItemBillLineAccount
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \MyobAPI\MyobPHP\ObjectSerializer;
 
 /**
- * ItemBillLocationAccount Class Doc Comment
+ * ItemBillLineAccount Class Doc Comment
  *
  * @category Class
  * @package  MyobAPI\MyobPHP
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ItemBillLocationAccount implements ModelInterface, ArrayAccess
+class ItemBillLineAccount implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ItemBillLocationAccount implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ItemBillLocationAccount';
+    protected static $openAPIModelName = 'ItemBillLineAccount';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

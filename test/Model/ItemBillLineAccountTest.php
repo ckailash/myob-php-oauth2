@@ -1,6 +1,6 @@
 <?php
 /**
- * ItemBillLocationAccountTest
+ * ItemBillLineAccountTest
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ namespace MyobAPI\MyobPHP;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ItemBillLocationAccountTest Class Doc Comment
+ * ItemBillLineAccountTest Class Doc Comment
  *
  * @category    Class
- * @description ItemBillLocationAccount
+ * @description ItemBillLineAccount
  * @package     MyobAPI\MyobPHP
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ItemBillLocationAccountTest extends TestCase
+class ItemBillLineAccountTest extends TestCase
 {
 
     /**
@@ -72,9 +72,9 @@ class ItemBillLocationAccountTest extends TestCase
     }
 
     /**
-     * Test "ItemBillLocationAccount"
+     * Test "ItemBillLineAccount"
      */
-    public function testItemBillLocationAccount()
+    public function testItemBillLineAccount()
     {
     }
 

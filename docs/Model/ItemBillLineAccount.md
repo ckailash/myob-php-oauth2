@@ -1,4 +1,4 @@
-# # ItemBillLocationAccount
+# # ItemBillLineAccount
 
 ## Properties
 

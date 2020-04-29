@@ -73,7 +73,7 @@ class ItemBillLine implements ModelInterface, ArrayAccess
         'discount_percent' => 'float',
         'tax_code' => '\MyobAPI\MyobPHP\Model\TaxCode',
         'item' => '\MyobAPI\MyobPHP\Model\Item',
-        'account' => '\MyobAPI\MyobPHP\Model\ItemBillLocationAccount',
+        'account' => '\MyobAPI\MyobPHP\Model\ItemBillLineAccount',
         'location' => '\MyobAPI\MyobPHP\Model\ItemBillLineLocation',
         'row_version' => 'string'
     ];
@@ -757,7 +757,7 @@ class ItemBillLine implements ModelInterface, ArrayAccess
     /**
      * Gets account
      *
-     * @return \MyobAPI\MyobPHP\Model\ItemBillLocationAccount
+     * @return \MyobAPI\MyobPHP\Model\ItemBillLineAccount
      */
     public function getAccount()
     {
@@ -767,7 +767,7 @@ class ItemBillLine implements ModelInterface, ArrayAccess
     /**
      * Sets account
      *
-     * @param \MyobAPI\MyobPHP\Model\ItemBillLocationAccount $account account
+     * @param \MyobAPI\MyobPHP\Model\ItemBillLineAccount $account account
      *
      * @return $this
      */

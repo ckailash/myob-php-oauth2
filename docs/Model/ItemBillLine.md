@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **discount_percent** | **float** |  | [optional] 
 **tax_code** | [**\MyobAPI\MyobPHP\Model\TaxCode**](TaxCode.md) |  | 
 **item** | [**\MyobAPI\MyobPHP\Model\Item**](Item.md) |  | 
-**account** | [**\MyobAPI\MyobPHP\Model\ItemBillLocationAccount**](ItemBillLocationAccount.md) |  | 
+**account** | [**\MyobAPI\MyobPHP\Model\ItemBillLineAccount**](ItemBillLineAccount.md) |  | 
 **location** | [**\MyobAPI\MyobPHP\Model\ItemBillLineLocation**](ItemBillLineLocation.md) |  | 
 **row_version** | **string** |  | [optional] 
 

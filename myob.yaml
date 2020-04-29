@@ -1189,7 +1189,7 @@ components:
         Item:
           $ref: '#/components/schemas/Item'
         Account:
-          $ref: '#/components/schemas/ItemBillLocationAccount'
+          $ref: '#/components/schemas/ItemBillLineAccount'
         Location:
           $ref: '#/components/schemas/ItemBillLineLocation'
         RowVersion:
@@ -1208,8 +1208,8 @@ components:
           type: string
         URI:
           type: string
-    ItemBillLocationAccount:
-      title: ItemBillLocationAccount
+    ItemBillLineAccount:
+      title: ItemBillLineAccount
       type: object
       nullable: true
       properties:
