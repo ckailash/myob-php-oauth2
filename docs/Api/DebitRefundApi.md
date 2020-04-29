@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 ## createDebitRefund
 
-> createDebitRefund($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund)
+> createDebitRefund($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding)
 
 Create a debit refund
 
@@ -38,12 +38,12 @@ $apiInstance = new MyobAPI\MyobPHP\Api\DebitRefundApi(
 );
 $x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
 $company_file_id = 'company_file_id_example'; // string | The ID of the company in use
+$create_debit_refund = new \MyobAPI\MyobPHP\Model\CreateDebitRefund(); // \MyobAPI\MyobPHP\Model\CreateDebitRefund | 
 $x_myobapi_version = v2; // string | The version of the API, v2 is the current version
 $accept_encoding = gzip,deflate; // string | 
-$create_debit_refund = new \MyobAPI\MyobPHP\Model\CreateDebitRefund(); // \MyobAPI\MyobPHP\Model\CreateDebitRefund | 
 
 try {
-    $apiInstance->createDebitRefund($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund);
+    $apiInstance->createDebitRefund($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding);
 } catch (Exception $e) {
     echo 'Exception when calling DebitRefundApi->createDebitRefund: ', $e->getMessage(), PHP_EOL;
 }
@@ -57,9 +57,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
  **company_file_id** | **string**| The ID of the company in use |
+ **create_debit_refund** | [**\MyobAPI\MyobPHP\Model\CreateDebitRefund**](../Model/CreateDebitRefund.md)|  |
  **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
  **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
- **create_debit_refund** | [**\MyobAPI\MyobPHP\Model\CreateDebitRefund**](../Model/CreateDebitRefund.md)|  | [optional]
 
 ### Return type
 
@@ -81,7 +81,7 @@ void (empty response body)
 
 ## deleteDebitRefund
 
-> deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund)
+> deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding)
 
 Delete a debit refund
 
@@ -107,12 +107,12 @@ $apiInstance = new MyobAPI\MyobPHP\Api\DebitRefundApi(
 $x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
 $company_file_id = 'company_file_id_example'; // string | The ID of the company in use
 $guid = 'guid_example'; // string | The GUID of the resource being created
+$delete_debit_refund = new \MyobAPI\MyobPHP\Model\DeleteDebitRefund(); // \MyobAPI\MyobPHP\Model\DeleteDebitRefund | 
 $x_myobapi_version = v2; // string | The version of the API, v2 is the current version
 $accept_encoding = gzip,deflate; // string | 
-$delete_debit_refund = new \MyobAPI\MyobPHP\Model\DeleteDebitRefund(); // \MyobAPI\MyobPHP\Model\DeleteDebitRefund | 
 
 try {
-    $apiInstance->deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund);
+    $apiInstance->deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding);
 } catch (Exception $e) {
     echo 'Exception when calling DebitRefundApi->deleteDebitRefund: ', $e->getMessage(), PHP_EOL;
 }
@@ -127,9 +127,9 @@ Name | Type | Description  | Notes
  **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
  **company_file_id** | **string**| The ID of the company in use |
  **guid** | **string**| The GUID of the resource being created |
+ **delete_debit_refund** | [**\MyobAPI\MyobPHP\Model\DeleteDebitRefund**](../Model/DeleteDebitRefund.md)|  |
  **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
  **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
- **delete_debit_refund** | [**\MyobAPI\MyobPHP\Model\DeleteDebitRefund**](../Model/DeleteDebitRefund.md)|  | [optional]
 
 ### Return type
 

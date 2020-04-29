@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## createItemBill
 
-> createItemBill($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_item_bill)
+> createItemBill($x_myobapi_key, $company_file_id, $create_item_bill, $x_myobapi_version, $accept_encoding)
 
 Create a new item bill
 
@@ -39,12 +39,12 @@ $apiInstance = new MyobAPI\MyobPHP\Api\PurchaseBillItemsApi(
 );
 $x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
 $company_file_id = 'company_file_id_example'; // string | The ID of the company in use
+$create_item_bill = new \MyobAPI\MyobPHP\Model\CreateItemBill(); // \MyobAPI\MyobPHP\Model\CreateItemBill | 
 $x_myobapi_version = v2; // string | The version of the API, v2 is the current version
 $accept_encoding = gzip,deflate; // string | 
-$create_item_bill = new \MyobAPI\MyobPHP\Model\CreateItemBill(); // \MyobAPI\MyobPHP\Model\CreateItemBill | 
 
 try {
-    $apiInstance->createItemBill($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_item_bill);
+    $apiInstance->createItemBill($x_myobapi_key, $company_file_id, $create_item_bill, $x_myobapi_version, $accept_encoding);
 } catch (Exception $e) {
     echo 'Exception when calling PurchaseBillItemsApi->createItemBill: ', $e->getMessage(), PHP_EOL;
 }
@@ -58,9 +58,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
  **company_file_id** | **string**| The ID of the company in use |
+ **create_item_bill** | [**\MyobAPI\MyobPHP\Model\CreateItemBill**](../Model/CreateItemBill.md)|  |
  **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
  **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
- **create_item_bill** | [**\MyobAPI\MyobPHP\Model\CreateItemBill**](../Model/CreateItemBill.md)|  | [optional]
 
 ### Return type
 
@@ -82,7 +82,7 @@ void (empty response body)
 
 ## deleteItemBill
 
-> deleteItemBill($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_item_bill)
+> deleteItemBill($x_myobapi_key, $company_file_id, $guid, $delete_item_bill, $x_myobapi_version, $accept_encoding)
 
 Delete an bill of item type
 
@@ -108,12 +108,12 @@ $apiInstance = new MyobAPI\MyobPHP\Api\PurchaseBillItemsApi(
 $x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
 $company_file_id = 'company_file_id_example'; // string | The ID of the company in use
 $guid = 'guid_example'; // string | The GUID of the resource being created
+$delete_item_bill = new \MyobAPI\MyobPHP\Model\DeleteItemBill(); // \MyobAPI\MyobPHP\Model\DeleteItemBill | 
 $x_myobapi_version = v2; // string | The version of the API, v2 is the current version
 $accept_encoding = gzip,deflate; // string | 
-$delete_item_bill = new \MyobAPI\MyobPHP\Model\DeleteItemBill(); // \MyobAPI\MyobPHP\Model\DeleteItemBill | 
 
 try {
-    $apiInstance->deleteItemBill($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_item_bill);
+    $apiInstance->deleteItemBill($x_myobapi_key, $company_file_id, $guid, $delete_item_bill, $x_myobapi_version, $accept_encoding);
 } catch (Exception $e) {
     echo 'Exception when calling PurchaseBillItemsApi->deleteItemBill: ', $e->getMessage(), PHP_EOL;
 }
@@ -128,9 +128,9 @@ Name | Type | Description  | Notes
  **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
  **company_file_id** | **string**| The ID of the company in use |
  **guid** | **string**| The GUID of the resource being created |
+ **delete_item_bill** | [**\MyobAPI\MyobPHP\Model\DeleteItemBill**](../Model/DeleteItemBill.md)|  |
  **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
  **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
- **delete_item_bill** | [**\MyobAPI\MyobPHP\Model\DeleteItemBill**](../Model/DeleteItemBill.md)|  | [optional]
 
 ### Return type
 
@@ -152,7 +152,7 @@ void (empty response body)
 
 ## editItemBill
 
-> editItemBill($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $edit_item_bill)
+> editItemBill($x_myobapi_key, $company_file_id, $guid, $edit_item_bill, $x_myobapi_version, $accept_encoding)
 
 Update a new item type bill
 
@@ -178,12 +178,12 @@ $apiInstance = new MyobAPI\MyobPHP\Api\PurchaseBillItemsApi(
 $x_myobapi_key = {{client_id}}; // string | The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx
 $company_file_id = 'company_file_id_example'; // string | The ID of the company in use
 $guid = 'guid_example'; // string | The GUID of the resource being created
+$edit_item_bill = new \MyobAPI\MyobPHP\Model\EditItemBill(); // \MyobAPI\MyobPHP\Model\EditItemBill | 
 $x_myobapi_version = v2; // string | The version of the API, v2 is the current version
 $accept_encoding = gzip,deflate; // string | 
-$edit_item_bill = new \MyobAPI\MyobPHP\Model\EditItemBill(); // \MyobAPI\MyobPHP\Model\EditItemBill | 
 
 try {
-    $apiInstance->editItemBill($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $edit_item_bill);
+    $apiInstance->editItemBill($x_myobapi_key, $company_file_id, $guid, $edit_item_bill, $x_myobapi_version, $accept_encoding);
 } catch (Exception $e) {
     echo 'Exception when calling PurchaseBillItemsApi->editItemBill: ', $e->getMessage(), PHP_EOL;
 }
@@ -198,9 +198,9 @@ Name | Type | Description  | Notes
  **x_myobapi_key** | **string**| The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx |
  **company_file_id** | **string**| The ID of the company in use |
  **guid** | **string**| The GUID of the resource being created |
+ **edit_item_bill** | [**\MyobAPI\MyobPHP\Model\EditItemBill**](../Model/EditItemBill.md)|  |
  **x_myobapi_version** | **string**| The version of the API, v2 is the current version | [optional] [default to &#39;v2&#39;]
  **accept_encoding** | **string**|  | [optional] [default to &#39;gzip,deflate&#39;]
- **edit_item_bill** | [**\MyobAPI\MyobPHP\Model\EditItemBill**](../Model/EditItemBill.md)|  | [optional]
 
 ### Return type
 

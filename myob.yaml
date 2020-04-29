@@ -313,6 +313,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/createItemBill'
+        required: true
       responses:
         201:
           description: ''
@@ -354,6 +355,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/editItemBill'
+        required: true
       responses:
         200:
           description: ''
@@ -375,6 +377,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/deleteItemBill'
+        required: true
       responses:
         200:
           description: ''
@@ -421,6 +424,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/createDebitRefund'
+        required: true
       responses:
         201:
           description: ''
@@ -463,6 +467,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/deleteDebitRefund'
+        required: true
       responses:
         200:
           description: ''

@@ -122,17 +122,17 @@ class DebitRefundApi
      *
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
+     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund create_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund create_debit_refund (optional)
      *
      * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function createDebitRefund($x_myobapi_key, $company_file_id, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $create_debit_refund = null)
+    public function createDebitRefund($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        $this->createDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund);
+        $this->createDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding);
     }
 
     /**
@@ -142,17 +142,17 @@ class DebitRefundApi
      *
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
+     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (optional)
      *
      * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $create_debit_refund = null)
+    public function createDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        $request = $this->createDebitRefundRequest($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund);
+        $request = $this->createDebitRefundRequest($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding);
 
         try {
             $options = $this->createHttpClientOption();
@@ -198,16 +198,16 @@ class DebitRefundApi
      *
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
+     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createDebitRefundAsync($x_myobapi_key, $company_file_id, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $create_debit_refund = null)
+    public function createDebitRefundAsync($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        return $this->createDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund)
+        return $this->createDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -222,17 +222,17 @@ class DebitRefundApi
      *
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
+     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $create_debit_refund = null)
+    public function createDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
         $returnType = '';
-        $request = $this->createDebitRefundRequest($x_myobapi_key, $company_file_id, $x_myobapi_version, $accept_encoding, $create_debit_refund);
+        $request = $this->createDebitRefundRequest($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version, $accept_encoding);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -262,14 +262,14 @@ class DebitRefundApi
      *
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
+     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\CreateDebitRefund $create_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createDebitRefundRequest($x_myobapi_key, $company_file_id, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $create_debit_refund = null)
+    protected function createDebitRefundRequest($x_myobapi_key, $company_file_id, $create_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
         // verify the required parameter 'x_myobapi_key' is set
         if ($x_myobapi_key === null || (is_array($x_myobapi_key) && count($x_myobapi_key) === 0)) {
@@ -281,6 +281,12 @@ class DebitRefundApi
         if ($company_file_id === null || (is_array($company_file_id) && count($company_file_id) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $company_file_id when calling createDebitRefund'
+            );
+        }
+        // verify the required parameter 'create_debit_refund' is set
+        if ($create_debit_refund === null || (is_array($create_debit_refund) && count($create_debit_refund) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_debit_refund when calling createDebitRefund'
             );
         }
 
@@ -393,17 +399,17 @@ class DebitRefundApi
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
      * @param  string $guid The GUID of the resource being created (required)
+     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund delete_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund delete_debit_refund (optional)
      *
      * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $delete_debit_refund = null)
+    public function deleteDebitRefund($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        $this->deleteDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund);
+        $this->deleteDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding);
     }
 
     /**
@@ -414,17 +420,17 @@ class DebitRefundApi
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
      * @param  string $guid The GUID of the resource being created (required)
+     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (optional)
      *
      * @throws \MyobAPI\MyobPHP\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $delete_debit_refund = null)
+    public function deleteDebitRefundWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        $request = $this->deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund);
+        $request = $this->deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding);
 
         try {
             $options = $this->createHttpClientOption();
@@ -471,16 +477,16 @@ class DebitRefundApi
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
      * @param  string $guid The GUID of the resource being created (required)
+     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteDebitRefundAsync($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $delete_debit_refund = null)
+    public function deleteDebitRefundAsync($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
-        return $this->deleteDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund)
+        return $this->deleteDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -496,17 +502,17 @@ class DebitRefundApi
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
      * @param  string $guid The GUID of the resource being created (required)
+     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $delete_debit_refund = null)
+    public function deleteDebitRefundAsyncWithHttpInfo($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
         $returnType = '';
-        $request = $this->deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version, $accept_encoding, $delete_debit_refund);
+        $request = $this->deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version, $accept_encoding);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -537,14 +543,14 @@ class DebitRefundApi
      * @param  string $x_myobapi_key The API key registered in https://my.myob.com.au/au/bd/DevAppList.aspx (required)
      * @param  string $company_file_id The ID of the company in use (required)
      * @param  string $guid The GUID of the resource being created (required)
+     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (required)
      * @param  string $x_myobapi_version The version of the API, v2 is the current version (optional, default to 'v2')
      * @param  string $accept_encoding (optional, default to 'gzip,deflate')
-     * @param  \MyobAPI\MyobPHP\Model\DeleteDebitRefund $delete_debit_refund (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate', $delete_debit_refund = null)
+    protected function deleteDebitRefundRequest($x_myobapi_key, $company_file_id, $guid, $delete_debit_refund, $x_myobapi_version = 'v2', $accept_encoding = 'gzip,deflate')
     {
         // verify the required parameter 'x_myobapi_key' is set
         if ($x_myobapi_key === null || (is_array($x_myobapi_key) && count($x_myobapi_key) === 0)) {
@@ -562,6 +568,12 @@ class DebitRefundApi
         if ($guid === null || (is_array($guid) && count($guid) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $guid when calling deleteDebitRefund'
+            );
+        }
+        // verify the required parameter 'delete_debit_refund' is set
+        if ($delete_debit_refund === null || (is_array($delete_debit_refund) && count($delete_debit_refund) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $delete_debit_refund when calling deleteDebitRefund'
             );
         }
 
