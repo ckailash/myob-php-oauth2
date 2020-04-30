@@ -4,10 +4,10 @@ All URIs are relative to *https://api.myob.com/accountright*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createDebitRefund**](DebitRefundApi.md#createDebitRefund) | **POST** /{company_file_id}/Sale/DebitRefund | Create a debit refund
-[**deleteDebitRefund**](DebitRefundApi.md#deleteDebitRefund) | **DELETE** /{company_file_id}/Sale/DebitRefund/{guid} | Delete a debit refund
-[**getDebitRefund**](DebitRefundApi.md#getDebitRefund) | **GET** /{company_file_id}/Sale/DebitRefund/{guid} | Get a debit refund by GUID
-[**getDebitRefunds**](DebitRefundApi.md#getDebitRefunds) | **GET** /{company_file_id}/Sale/DebitRefund | Get debit refunds
+[**createDebitRefund**](DebitRefundApi.md#createDebitRefund) | **POST** /{company_file_id}/Purchase/DebitRefund | Create a debit refund
+[**deleteDebitRefund**](DebitRefundApi.md#deleteDebitRefund) | **DELETE** /{company_file_id}/Purchase/DebitRefund/{guid} | Delete a debit refund
+[**getDebitRefund**](DebitRefundApi.md#getDebitRefund) | **GET** /{company_file_id}/Purchase/DebitRefund/{guid} | Get a debit refund by GUID
+[**getDebitRefunds**](DebitRefundApi.md#getDebitRefunds) | **GET** /{company_file_id}/Purchase/DebitRefund | Get debit refunds
 
 
 

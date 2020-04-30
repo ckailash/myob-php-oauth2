@@ -290,7 +290,7 @@ class DebitRefundApi
             );
         }
 
-        $resourcePath = '/{company_file_id}/Sale/DebitRefund';
+        $resourcePath = '/{company_file_id}/Purchase/DebitRefund';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -577,7 +577,7 @@ class DebitRefundApi
             );
         }
 
-        $resourcePath = '/{company_file_id}/Sale/DebitRefund/{guid}';
+        $resourcePath = '/{company_file_id}/Purchase/DebitRefund/{guid}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -909,7 +909,7 @@ class DebitRefundApi
             );
         }
 
-        $resourcePath = '/{company_file_id}/Sale/DebitRefund/{guid}';
+        $resourcePath = '/{company_file_id}/Purchase/DebitRefund/{guid}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1257,7 +1257,7 @@ class DebitRefundApi
             );
         }
 
-        $resourcePath = '/{company_file_id}/Sale/DebitRefund';
+        $resourcePath = '/{company_file_id}/Purchase/DebitRefund';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

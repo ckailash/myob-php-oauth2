@@ -94,10 +94,10 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountsApi* | [**getAccount**](docs/Api/AccountsApi.md#getaccount) | **GET** /{company_file_id}/GeneralLedger/Account/{guid} | Get an account by GUID
 *AccountsApi* | [**getAccounts**](docs/Api/AccountsApi.md#getaccounts) | **GET** /{company_file_id}/GeneralLedger/Account | Gets all accounts
-*DebitRefundApi* | [**createDebitRefund**](docs/Api/DebitRefundApi.md#createdebitrefund) | **POST** /{company_file_id}/Sale/DebitRefund | Create a debit refund
-*DebitRefundApi* | [**deleteDebitRefund**](docs/Api/DebitRefundApi.md#deletedebitrefund) | **DELETE** /{company_file_id}/Sale/DebitRefund/{guid} | Delete a debit refund
-*DebitRefundApi* | [**getDebitRefund**](docs/Api/DebitRefundApi.md#getdebitrefund) | **GET** /{company_file_id}/Sale/DebitRefund/{guid} | Get a debit refund by GUID
-*DebitRefundApi* | [**getDebitRefunds**](docs/Api/DebitRefundApi.md#getdebitrefunds) | **GET** /{company_file_id}/Sale/DebitRefund | Get debit refunds
+*DebitRefundApi* | [**createDebitRefund**](docs/Api/DebitRefundApi.md#createdebitrefund) | **POST** /{company_file_id}/Purchase/DebitRefund | Create a debit refund
+*DebitRefundApi* | [**deleteDebitRefund**](docs/Api/DebitRefundApi.md#deletedebitrefund) | **DELETE** /{company_file_id}/Purchase/DebitRefund/{guid} | Delete a debit refund
+*DebitRefundApi* | [**getDebitRefund**](docs/Api/DebitRefundApi.md#getdebitrefund) | **GET** /{company_file_id}/Purchase/DebitRefund/{guid} | Get a debit refund by GUID
+*DebitRefundApi* | [**getDebitRefunds**](docs/Api/DebitRefundApi.md#getdebitrefunds) | **GET** /{company_file_id}/Purchase/DebitRefund | Get debit refunds
 *GeneralAPIEndpointsApi* | [**getCompanyFile**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfile) | **GET** /{company_file_id} | Get the details of one specific company file
 *GeneralAPIEndpointsApi* | [**getCompanyFiles**](docs/Api/GeneralAPIEndpointsApi.md#getcompanyfiles) | **GET** / | List all company files in the users account
 *PurchaseBillItemsApi* | [**createItemBill**](docs/Api/PurchaseBillItemsApi.md#createitembill) | **POST** /{company_file_id}/Purchase/Bill/Item | Create a new item bill

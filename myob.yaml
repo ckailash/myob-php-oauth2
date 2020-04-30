@@ -381,7 +381,7 @@ paths:
       responses:
         200:
           description: ''
-  /{company_file_id}/Sale/DebitRefund:
+  /{company_file_id}/Purchase/DebitRefund:
     get:
       tags:
         - Debit Refund
@@ -429,7 +429,7 @@ paths:
         201:
           description: ''
           headers: {}
-  /{company_file_id}/Sale/DebitRefund/{guid}:
+  /{company_file_id}/Purchase/DebitRefund/{guid}:
     get:
       tags:
         - Debit Refund
