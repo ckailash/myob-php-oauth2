@@ -198,8 +198,31 @@ class ItemBillTerms implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const PAYMENT_IS_DUE_CASH_ON_DELIVERY = 'CashOnDelivery';
+    const PAYMENT_IS_DUE_PRE_PAID = 'PrePaid';
+    const PAYMENT_IS_DUE_IN_A_GIVEN_NUMBER_OF_DAYS = 'InAGivenNumberOfDays';
+    const PAYMENT_IS_DUE_ON_A_DAY_OF_THE_MONTH = 'OnADayOfTheMonth';
+    const PAYMENT_IS_DUE_NUMBER_OF_DAYS_AFTER_EOM = 'NumberOfDaysAfterEOM';
+    const PAYMENT_IS_DUE_DAY_OF_MONTH_AFTER_EOM = 'DayOfMonthAfterEOM';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPaymentIsDueAllowableValues()
+    {
+        return [
+            self::PAYMENT_IS_DUE_CASH_ON_DELIVERY,
+            self::PAYMENT_IS_DUE_PRE_PAID,
+            self::PAYMENT_IS_DUE_IN_A_GIVEN_NUMBER_OF_DAYS,
+            self::PAYMENT_IS_DUE_ON_A_DAY_OF_THE_MONTH,
+            self::PAYMENT_IS_DUE_NUMBER_OF_DAYS_AFTER_EOM,
+            self::PAYMENT_IS_DUE_DAY_OF_MONTH_AFTER_EOM,
+        ];
+    }
     
 
     /**
@@ -237,6 +260,14 @@ class ItemBillTerms implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getPaymentIsDueAllowableValues();
+        if (!is_null($this->container['payment_is_due']) && !in_array($this->container['payment_is_due'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'payment_is_due', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -271,6 +302,15 @@ class ItemBillTerms implements ModelInterface, ArrayAccess
      */
     public function setPaymentIsDue($payment_is_due)
     {
+        $allowedValues = $this->getPaymentIsDueAllowableValues();
+        if (!is_null($payment_is_due) && !in_array($payment_is_due, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'payment_is_due', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['payment_is_due'] = $payment_is_due;
 
         return $this;
