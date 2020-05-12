@@ -471,6 +471,51 @@ paths:
       responses:
         200:
           description: ''
+  /{company_file_id}/GeneralLedger/TaxCode:
+    get:
+      tags:
+        - TaxCodes
+      summary: Get all tax codes
+      description: Get all tax codes
+      operationId: getTaxCodes
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/ifModifiedSince'
+        - $ref: '#/components/parameters/ifNoneMatch'
+        - $ref: '#/components/parameters/orderBy'
+        - $ref: '#/components/parameters/top'
+        - $ref: '#/components/parameters/skip'
+        - $ref: '#/components/parameters/filter'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodes'
+  /{company_file_id}/GeneralLedger/TaxCode/{guid}:
+    get:
+      tags:
+        - TaxCodes
+      summary: Get a tax code by GUID
+      description: Get a tax code by GUID
+      operationId: getTaxCode
+      parameters:
+        - $ref: '#/components/parameters/x-myobapi-key'
+        - $ref: '#/components/parameters/x-myobapi-version'
+        - $ref: '#/components/parameters/Accept-Encoding'
+        - $ref: '#/components/parameters/company_file_id'
+        - $ref: '#/components/parameters/guid'
+      responses:
+        200:
+          description: ''
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/TaxCodeExtended'
 components:
   securitySchemes:
     OAuth2:
@@ -569,6 +614,146 @@ components:
       schema:
         type: string
   schemas:
+    TaxCodes:
+      title: TaxCodes
+      required:
+        - Items
+        - NextPageLink
+        - Count
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxCodeExtended'
+          description: ''
+        NextPageLink:
+          type: string
+          nullable: true
+        Count:
+          type: integer
+          format: int32
+    TaxCodeExtended:
+      title: TaxCodeExtended
+      required:
+        - UID
+        - Code
+        - Description
+        - Type
+      type: object
+      properties:
+        UID:
+          type: string
+        Code:
+          type: string
+        Description:
+          type: string
+        Type:
+          type: string
+          enum:
+            - ImportDuty
+            - SalesTax
+            - GST_VAT (Goods and Services Tax)
+            - InputTaxed
+            - Consolidated
+            - LuxuryCarTax
+            - WithholdingsTax
+            - NoABN_TFN
+        Rate:
+          type: number
+        IsRateNegative:
+          type: boolean
+        TaxCollectedAccount:
+          $ref: '#/components/schemas/TaxCollectedAccount'
+        TaxPaidAccount:
+          $ref: '#/components/schemas/TaxPaidAccount'
+        WithholdingCreditAccount:
+          $ref: '#/components/schemas/WithholdingCreditAccount'
+        WithholdingPayableAccount:
+          $ref: '#/components/schemas/WithholdingPayableAccount'
+        ImportDutyPayableAccount:
+          $ref: '#/components/schemas/ImportDutyPayableAccount'
+        LinkedSupplier:
+          type: string
+          nullable: true
+        LuxuryCarTaxThreshold:
+          type: number
+        LastModified:
+          type: string
+        URI:
+          type: string
+        RowVersion:
+          type: string
+    TaxCollectedAccount:
+      title: TaxCollectedAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    TaxPaidAccount:
+      title: TaxPaidAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+    WithholdingCreditAccount:
+      title: WithholdingCreditAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+      example:
+        UID: c4b34db6-4af8-4c63-9d2e-9ef710599f2c
+        Name: ABN Withholding Credits
+        DisplayID: 1-1970
+        URI: https://ar1.api.myob.com/accountright/36c69572-d2a7-4539-86df-5d47256d098c/GeneralLedger/Account/c4b34db6-4af8-4c63-9d2e-9ef710599f2c
+    WithholdingPayableAccount:
+      title: WithholdingPayableAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
+      example:
+        UID: aec715a9-43f7-46f5-83a6-acc1ef157fa0
+        Name: ABN Withholding Payable
+        DisplayID: 2-3080
+        URI: https://ar1.api.myob.com/accountright/36c69572-d2a7-4539-86df-5d47256d098c/GeneralLedger/Account/aec715a9-43f7-46f5-83a6-acc1ef157fa0
+    ImportDutyPayableAccount:
+      title: ImportDutyPayableAccount
+      type: object
+      properties:
+        UID:
+          type: string
+        Name:
+          type: string
+        DisplayID:
+          type: string
+        URI:
+          type: string
     createDebitRefund:
       title: createDebitRefund
       required:

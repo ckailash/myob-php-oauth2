@@ -110,6 +110,8 @@ Class | Method | HTTP request | Description
 *SupplierApi* | [**editSupplier**](docs/Api/SupplierApi.md#editsupplier) | **PUT** /{company_file_id}/Contact/Supplier/{guid} | Edit a supplier
 *SupplierApi* | [**getSupplier**](docs/Api/SupplierApi.md#getsupplier) | **GET** /{company_file_id}/Contact/Supplier/{guid} | Get a supplier by GUID
 *SupplierApi* | [**getSuppliers**](docs/Api/SupplierApi.md#getsuppliers) | **GET** /{company_file_id}/Contact/Supplier | Fetch a list of all Suppliers
+*TaxCodesApi* | [**getTaxCode**](docs/Api/TaxCodesApi.md#gettaxcode) | **GET** /{company_file_id}/GeneralLedger/TaxCode/{guid} | Get a tax code by GUID
+*TaxCodesApi* | [**getTaxCodes**](docs/Api/TaxCodesApi.md#gettaxcodes) | **GET** /{company_file_id}/GeneralLedger/TaxCode | Get all tax codes
 
 
 ## Documentation For Models
@@ -142,6 +144,7 @@ Class | Method | HTTP request | Description
  - [GetDebitRefunds](docs/Model/GetDebitRefunds.md)
  - [GetItemBills](docs/Model/GetItemBills.md)
  - [Identifiers](docs/Model/Identifiers.md)
+ - [ImportDutyPayableAccount](docs/Model/ImportDutyPayableAccount.md)
  - [Item](docs/Model/Item.md)
  - [ItemBill](docs/Model/ItemBill.md)
  - [ItemBillCategory](docs/Model/ItemBillCategory.md)
@@ -160,6 +163,12 @@ Class | Method | HTTP request | Description
  - [Supplier](docs/Model/Supplier.md)
  - [Suppliers](docs/Model/Suppliers.md)
  - [TaxCode](docs/Model/TaxCode.md)
+ - [TaxCodeExtended](docs/Model/TaxCodeExtended.md)
+ - [TaxCodes](docs/Model/TaxCodes.md)
+ - [TaxCollectedAccount](docs/Model/TaxCollectedAccount.md)
+ - [TaxPaidAccount](docs/Model/TaxPaidAccount.md)
+ - [WithholdingCreditAccount](docs/Model/WithholdingCreditAccount.md)
+ - [WithholdingPayableAccount](docs/Model/WithholdingPayableAccount.md)
 
 
 ## Documentation For Authorization
