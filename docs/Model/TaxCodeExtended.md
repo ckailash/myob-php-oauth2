@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**uid** | **string** |  | 
-**code** | **string** |  | 
-**description** | **string** |  | 
-**type** | **string** |  | 
+**uid** | **string** |  | [optional] 
+**code** | **string** |  | [optional] 
+**description** | **string** |  | [optional] 
+**type** | **string** |  | [optional] 
 **rate** | **float** |  | [optional] 
 **is_rate_negative** | **bool** |  | [optional] 
 **tax_collected_account** | [**\MyobAPI\MyobPHP\Model\TaxCollectedAccount**](TaxCollectedAccount.md) |  | [optional] 

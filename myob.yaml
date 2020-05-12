@@ -635,11 +635,6 @@ components:
           format: int32
     TaxCodeExtended:
       title: TaxCodeExtended
-      required:
-        - UID
-        - Code
-        - Description
-        - Type
       type: object
       properties:
         UID:
@@ -653,7 +648,7 @@ components:
           enum:
             - ImportDuty
             - SalesTax
-            - GST_VAT (Goods and Services Tax)
+            - GST_VAT
             - InputTaxed
             - Consolidated
             - LuxuryCarTax

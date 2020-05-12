@@ -235,7 +235,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
 
     const TYPE_IMPORT_DUTY = 'ImportDuty';
     const TYPE_SALES_TAX = 'SalesTax';
-    const TYPE_GST_VAT__GOODS_AND_SERVICES_TAX = 'GST_VAT (Goods and Services Tax)';
+    const TYPE_GST_VAT = 'GST_VAT';
     const TYPE_INPUT_TAXED = 'InputTaxed';
     const TYPE_CONSOLIDATED = 'Consolidated';
     const TYPE_LUXURY_CAR_TAX = 'LuxuryCarTax';
@@ -254,7 +254,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
         return [
             self::TYPE_IMPORT_DUTY,
             self::TYPE_SALES_TAX,
-            self::TYPE_GST_VAT__GOODS_AND_SERVICES_TAX,
+            self::TYPE_GST_VAT,
             self::TYPE_INPUT_TAXED,
             self::TYPE_CONSOLIDATED,
             self::TYPE_LUXURY_CAR_TAX,
@@ -306,18 +306,6 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['uid'] === null) {
-            $invalidProperties[] = "'uid' can't be null";
-        }
-        if ($this->container['code'] === null) {
-            $invalidProperties[] = "'code' can't be null";
-        }
-        if ($this->container['description'] === null) {
-            $invalidProperties[] = "'description' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
         $allowedValues = $this->getTypeAllowableValues();
         if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -344,7 +332,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Gets uid
      *
-     * @return string
+     * @return string|null
      */
     public function getUid()
     {
@@ -354,7 +342,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Sets uid
      *
-     * @param string $uid uid
+     * @param string|null $uid uid
      *
      * @return $this
      */
@@ -368,7 +356,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Gets code
      *
-     * @return string
+     * @return string|null
      */
     public function getCode()
     {
@@ -378,7 +366,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Sets code
      *
-     * @param string $code code
+     * @param string|null $code code
      *
      * @return $this
      */
@@ -392,7 +380,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Gets description
      *
-     * @return string
+     * @return string|null
      */
     public function getDescription()
     {
@@ -402,7 +390,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string $description description
+     * @param string|null $description description
      *
      * @return $this
      */
@@ -416,7 +404,7 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return string
+     * @return string|null
      */
     public function getType()
     {
@@ -426,14 +414,14 @@ class TaxCodeExtended implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param string $type type
+     * @param string|null $type type
      *
      * @return $this
      */
     public function setType($type)
     {
         $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value for 'type', must be one of '%s'",
